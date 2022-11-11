@@ -36,7 +36,7 @@ print('</head>')
 print('<body>')
 print('<h1>THEIA SP Track Changes</h1>')
 
-print('<p>Notice: &bull; Only the last 30 day changes are displayed. &bull; This information is updated every 2 hours. &bull; Last 48h of changes are in <span class="highlight">highlight</span>.</p>')
+print('<p>Notice: &bull; Only the last 30 day changes are displayed. &bull; This information is updated every 5 minutes. &bull; Last 48h of changes are in <span class="highlight">highlight</span>.</p>')
 print(f'<p>Last track changes update: {date2str(datetime.now())}</p>')
 ago30days = datetime.now() - timedelta(days=30)
 recent = datetime.now() - timedelta(hours=48)
