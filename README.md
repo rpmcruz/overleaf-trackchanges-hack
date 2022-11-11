@@ -11,6 +11,6 @@ To make it working:
     - `nano overleaf-toolkit/config/nginx/nginx.conf`
     - location /diff { alias /containerdir; autoindex on; }
 3. You may want to add a button for your changes in `./services/web/app/views/layout/navbar.pug`
-4. Refresh your trackchanges by running the script in this repo to `crontab -e`
+4. Refresh your trackchanges by running the script (available in this repository) or adding it to `sudo crontab -e`.
 
 ![](screenshot.png)
