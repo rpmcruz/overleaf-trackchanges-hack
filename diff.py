@@ -4,16 +4,19 @@ parser.add_argument('--projects-regex', default='SP.*')
 args = parser.parse_args()
 
 from datetime import datetime, timedelta
+import humanize
 import pymongo
+from bson.objectid import ObjectId
 
 client = pymongo.MongoClient('172.18.0.3', 27017)
 db = client.sharelatex
 
 def date2str(date):
-    return date.strftime('%Y-%m-%d %H:%M')
+    #return date.strftime('%Y-%m-%d %H:%M')
+    return humanize.naturaltime(date)
 
 def get_user(user_id):
-    user = db.users.find_one({'_id': user_id})
+    user = db.users.find_one({'_id': ObjectId(user_id)})
     return user['email'] if user else 'unknown'
 
 def find_filename(folders, doc_id):
@@ -50,7 +53,7 @@ print('<tr><th>Document</th><th>Last update</th><th>Updated by</th></tr>')
 for project in projects:
     update = project['lastUpdated']
     class_highlight = "class='highlight'" if update >= recent else ""
-    print(f"<tr {class_highlight}><td><a href=#{project['_id']}>{project['name']}</a></td><td>{project['lastUpdated']}</td><td>{get_user(project['lastUpdatedBy'])}</td></tr>")
+    print(f"<tr {class_highlight}><td><a href=#{project['_id']}>{project['name']}</a></td><td>{date2str(project['lastUpdated'])}</td><td>{get_user(project['lastUpdatedBy'])}</td></tr>")
 print('</table>')
 
 for project in projects:
